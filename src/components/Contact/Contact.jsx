@@ -1,12 +1,11 @@
 import css from './contact.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPhone, faUser } from '@fortawesome/free-solid-svg-icons';
+import { useDispatch } from 'react-redux';
+import { deleteContact } from '../../redux/contactsSlice.js';
 
-const Contact = ({ contactData: { name, number, id }, onDelete }) => {
-  function deleteContact(e) {
-    console.log(e.currentTarget);
-  }
-
+const Contact = ({ contactData: { name, number, id } }) => {
+  const dispatch = useDispatch();
   return (
     <div className={css.contactWrapper}>
       <div>
@@ -19,7 +18,10 @@ const Contact = ({ contactData: { name, number, id }, onDelete }) => {
           {number}
         </p>
       </div>
-      <button className={css.deleteBtn} onClick={() => onDelete(id)}>
+      <button
+        className={css.deleteBtn}
+        onClick={() => dispatch(deleteContact(id))}
+      >
         Delete
       </button>
     </div>
